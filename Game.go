@@ -13,8 +13,10 @@ type Game struct {
 	colliders []CompCollider
 	colliderMap map[*Enemy]CompCollider
 	entities []*Entity
-	compRenderedNonPlayers []*CompRenderedNonPlayer
-	compColliders []*CompCollider
+	compRendNPO []*CompRendNPO
+	compRendNPOMap map[int]*CompRendNPO
+	compCollider []*CompCollider
+	entityId int
 }
 
 func NewGame() Game {
@@ -25,14 +27,14 @@ func NewGame() Game {
 
 func (g *Game) Update() error {
 	deltax, deltay := g.player.move()
-	for _, s := range g.compRenderedNonPlayers {
+	for _, s := range g.compRendNPO {
 		s.moveCamera(deltax, deltay)
 	}
 	rectPlayer := image.Rect(int(g.player.xpos), int(g.player.ypos), int(g.player.xpos)+30, int(g.player.ypos)+30)
 	/*for _, s := range g.collideables {
 		s.collide(rectPlayer)
 	}*/
-	for _, s := range g.colliders {
+	for _, s := range g.compCollider {
 		s.collide(rectPlayer)
 	}
 	return nil
@@ -43,7 +45,7 @@ var i float64 = 0
 func (g *Game) Draw(screen *ebiten.Image) {
 
 	g.player.draw(screen)
-	for _, s := range g.compRenderedNonPlayers {
+	for _, s := range g.compRendNPO {
 		x, y := s.getPosition()
 		if (x-g.player.xpos) > -g.renderDistance && (x-g.player.xpos) < g.renderDistance && (y-g.player.ypos) > -g.renderDistance && (y-g.player.ypos) < g.renderDistance {
 			s.draw(screen)

@@ -1,10 +1,13 @@
 package main
 
 type Entity struct {
+	id int
 }
 
 func NewEntity() *Entity{
 	new := Entity{}
+	new.id = g.entityId
+	g.entityId++
 	g.entities = append(g.entities, &new)
 	return &new
 }

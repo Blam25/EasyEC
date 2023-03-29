@@ -1,0 +1,12 @@
+	//NewCompRenderedNonPlayer(entity1, 200, 200)
+
+	/*
+	//enemy1 := New_Enemy()
+	enemy2 := New_Enemy() ; enemy2.xpos = 500 ; enemy2.ypos = 500 
+	enemy2.addCollider([]event{NewDmgEvent(60, "Im hit"), NewDmgEvent(60, "Yes really")})
+	//NewCollider(&enemy2, []event{NewDmgEvent(60, "Im hit"), NewDmgEvent(60, "Yes really")})
+	enemy3 := New_Enemy() ; enemy3.xpos = 1000 ; enemy3.ypos = 1000 ;
+	//game.collideables = append(game.collideables, &enemy1, &enemy2, &enemy3)
+	
+	//op := &ebiten.DrawImageOptions{}
+	//op = &ebiten.DrawImageOptions{}*/

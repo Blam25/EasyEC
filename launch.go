@@ -17,13 +17,27 @@ var entityOrder int = 1
 
 func init() {
 	g = NewGame()
+	g.compRendNPOMap = make(map[int]*CompRendNPO)
 	sprite1 := New_Sprite()
+	
 	entity1 := NewEntity()
+	print(&entity1)
 	entity1.
-	with(NewCompRenderedNonPlayer2, NewDataArgs(nil, nil, []float64{500, 500}, nil))
-	//NewCompRenderedNonPlayer(entity1, 200, 200)
+	with(NewCompRendNPO, NewDataArgs(nil, nil, []float64{500, 500}, nil)).
+	with(NewCompCollider, &dataArgs{})
+	
 	entity2 := NewEntity()
-	NewCompRenderedNonPlayer(entity2, 1000, 1000)
+	print(&entity2)
+	entity2.with(
+		NewCompRendNPO, NewArgFloat(1000, 1000)).with(
+		NewCompCollider, &dataArgs{})
+		
+	entity3 := NewEntity()
+	entity3.with(
+		NewCompRendNPO, NewArgFloat(1000, 0)).with(
+		NewCompCollider, &dataArgs{})
+		
+	//NewCompRenderedNonPlayer(entity2, 1000, 1000)
 	g.player = sprite1
 	/*
 	//enemy1 := New_Enemy()

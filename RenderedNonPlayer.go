@@ -8,7 +8,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 )
 
-type CompRenderedNonPlayer struct {
+type CompRendNPO struct {
 	img       *ebiten.Image
 	op        ebiten.DrawImageOptions
 	xpos      float64
@@ -19,7 +19,7 @@ type CompRenderedNonPlayer struct {
 //type NewRenderedNonPlayer func(*Entity)  
 
 func NewCompRenderedNonPlayer(entity *Entity, xpos float64, ypos float64) {
-	new := CompRenderedNonPlayer{}
+	new := CompRendNPO{}
 	var err error
 	new.img, _, err = ebitenutil.NewImageFromFile("assets/gopher.png")
 	if err != nil {
@@ -28,11 +28,11 @@ func NewCompRenderedNonPlayer(entity *Entity, xpos float64, ypos float64) {
 	new.xpos = xpos
 	new.ypos = ypos
 	new.entity = entity
-	g.compRenderedNonPlayers = append(g.compRenderedNonPlayers, &new)
+	g.compRendNPO = append(g.compRendNPO, &new)
 }
 
-func NewCompRenderedNonPlayer2(entity *Entity, data *dataArgs) {
-	new := CompRenderedNonPlayer{}
+func NewCompRendNPO(entity *Entity, data *dataArgs) {
+	new := CompRendNPO{}
 	var err error
 	new.img, _, err = ebitenutil.NewImageFromFile("assets/gopher.png")
 	if err != nil {
@@ -41,19 +41,20 @@ func NewCompRenderedNonPlayer2(entity *Entity, data *dataArgs) {
 	new.xpos = data.floats[0]
 	new.ypos = data.floats[1]
 	new.entity = entity
-	g.compRenderedNonPlayers = append(g.compRenderedNonPlayers, &new)
+	g.compRendNPO = append(g.compRendNPO, &new)
+	g.compRendNPOMap[entity.id] = &new
 }
 
-func (s *CompRenderedNonPlayer) moveCamera(deltaX float64, deltaY float64) {
+func (s *CompRendNPO) moveCamera(deltaX float64, deltaY float64) {
 	s.ypos = s.ypos + deltaY
 	s.xpos = s.xpos + deltaX
 }
 
-func (s *CompRenderedNonPlayer) getPosition() (float64, float64){
+func (s *CompRendNPO) getPosition() (float64, float64){
 	return s.xpos, s.ypos
 }
 
-func (s *CompRenderedNonPlayer) draw(screen *ebiten.Image) {
+func (s *CompRendNPO) draw(screen *ebiten.Image) {
 	s.op.GeoM.Reset()
 	s.op.GeoM.Translate(s.xpos, s.ypos)
 	screen.DrawImage(s.img, &s.op)

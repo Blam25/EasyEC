@@ -58,11 +58,11 @@ func (s *Enemy) collide(rectPlayer image.Rectangle) {
 func (s *Enemy) getPosition() (float64, float64){
 	return s.xpos, s.ypos
 }
-
+/*
 func (s *Enemy) addCollider(events []event) *Enemy {
 	g.colliders = append(g.colliders, NewCompCollider(s, events))
 	return s
-}
+}*/
 
 func (s *Enemy) addColliderEvent() {
 	
