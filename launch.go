@@ -20,7 +20,7 @@ func init() {
 	sprite1 := New_Sprite()
 	entity1 := NewEntity()
 	entity1.
-	with(NewCompRenderedNonPlayer2, NewArgFloat(500, 600))
+	with(NewCompRenderedNonPlayer2, NewDataArgs(nil, nil, []float64{500, 500}, nil))
 	//NewCompRenderedNonPlayer(entity1, 200, 200)
 	entity2 := NewEntity()
 	NewCompRenderedNonPlayer(entity2, 1000, 1000)
@@ -84,37 +84,37 @@ func (s *dataArgs) setBool(theBools ...bool) {
 	s.bools = theBools
 }
 
-func NewDataArgs(strings []string, ints []int, floats []float64, bools []bool) dataArgs {
+func NewDataArgs(strings []string, ints []int, floats []float64, bools []bool) *dataArgs {
 	new := dataArgs{}
 	new.strings = strings
 	new.ints = ints
 	new.floats = floats
 	new. bools = bools
-	return new
+	return &new
 }
 
-func NewArgString(theStrings ...string) dataArgs{
+func NewArgString(theStrings ...string) *dataArgs{
 	new := dataArgs{}
 	new.strings = theStrings
-	return new
+	return &new
 }
 
-func NewArgInt(theInts ...int) dataArgs {
+func NewArgInt(theInts ...int) *dataArgs {
 	new := dataArgs{}
 	new.ints = theInts
-	return new
+	return &new
 }
 
-func NewArgFloat(theFloats ...float64) dataArgs {
+func NewArgFloat(theFloats ...float64) *dataArgs {
 	new := dataArgs{}
 	new.floats = theFloats
-	return new
+	return &new
 }
 
-func NewArgBool(theBools ...bool) dataArgs {
+func NewArgBool(theBools ...bool) *dataArgs {
 	new := dataArgs{}
 	new.bools = theBools
-	return new
+	return &new
 }
 
 /*func GetId(entity *Enemy) int {

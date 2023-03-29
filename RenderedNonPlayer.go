@@ -31,7 +31,7 @@ func NewCompRenderedNonPlayer(entity *Entity, xpos float64, ypos float64) {
 	g.compRenderedNonPlayers = append(g.compRenderedNonPlayers, &new)
 }
 
-func NewCompRenderedNonPlayer2(entity *Entity, data dataArgs) {
+func NewCompRenderedNonPlayer2(entity *Entity, data *dataArgs) {
 	new := CompRenderedNonPlayer{}
 	var err error
 	new.img, _, err = ebitenutil.NewImageFromFile("assets/gopher.png")
