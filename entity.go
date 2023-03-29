@@ -9,8 +9,8 @@ func NewEntity() *Entity{
 	return &new
 }
 
-/*func (s *Entity) with(f func(*Entity), entity *Entity) *Entity {
-	f(entity)
-	return entity
+func (s *Entity) with(f func(*Entity, dataArgs), data dataArgs) *Entity {
+	f(s, data)
+	return s
 	 
-}*/
+}

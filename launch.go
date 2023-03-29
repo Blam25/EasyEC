@@ -19,7 +19,9 @@ func init() {
 	g = NewGame()
 	sprite1 := New_Sprite()
 	entity1 := NewEntity()
-	NewCompRenderedNonPlayer(entity1, 500, 500)
+	entity1.
+	with(NewCompRenderedNonPlayer2, NewArgFloat(500, 600))
+	//NewCompRenderedNonPlayer(entity1, 200, 200)
 	entity2 := NewEntity()
 	NewCompRenderedNonPlayer(entity2, 1000, 1000)
 	g.player = sprite1
@@ -56,6 +58,63 @@ type collide interface {
 
 type event interface {
 	execute(enemy *Enemy)
+}
+
+type dataArgs struct {
+	strings []string
+	ints []int
+	floats []float64
+	bools	[]bool
+	
+}
+
+func (s *dataArgs) setString(theStrings ...string) {
+	s.strings = theStrings
+}
+
+func (s *dataArgs) setInt(theInts ...int) {
+	s.ints = theInts
+}
+
+func (s *dataArgs) setFloat(theFloats ...float64) {
+	s.floats = theFloats
+}
+
+func (s *dataArgs) setBool(theBools ...bool) {
+	s.bools = theBools
+}
+
+func NewDataArgs(strings []string, ints []int, floats []float64, bools []bool) dataArgs {
+	new := dataArgs{}
+	new.strings = strings
+	new.ints = ints
+	new.floats = floats
+	new. bools = bools
+	return new
+}
+
+func NewArgString(theStrings ...string) dataArgs{
+	new := dataArgs{}
+	new.strings = theStrings
+	return new
+}
+
+func NewArgInt(theInts ...int) dataArgs {
+	new := dataArgs{}
+	new.ints = theInts
+	return new
+}
+
+func NewArgFloat(theFloats ...float64) dataArgs {
+	new := dataArgs{}
+	new.floats = theFloats
+	return new
+}
+
+func NewArgBool(theBools ...bool) dataArgs {
+	new := dataArgs{}
+	new.bools = theBools
+	return new
 }
 
 /*func GetId(entity *Enemy) int {

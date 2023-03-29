@@ -28,7 +28,20 @@ func NewCompRenderedNonPlayer(entity *Entity, xpos float64, ypos float64) {
 	new.xpos = xpos
 	new.ypos = ypos
 	new.entity = entity
-	g.renderedNonPlayers = append(g.renderedNonPlayers, &new)
+	g.compRenderedNonPlayers = append(g.compRenderedNonPlayers, &new)
+}
+
+func NewCompRenderedNonPlayer2(entity *Entity, data dataArgs) {
+	new := CompRenderedNonPlayer{}
+	var err error
+	new.img, _, err = ebitenutil.NewImageFromFile("assets/gopher.png")
+	if err != nil {
+		log.Fatal(err)
+	}
+	new.xpos = data.floats[0]
+	new.ypos = data.floats[1]
+	new.entity = entity
+	g.compRenderedNonPlayers = append(g.compRenderedNonPlayers, &new)
 }
 
 func (s *CompRenderedNonPlayer) moveCamera(deltaX float64, deltaY float64) {

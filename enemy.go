@@ -60,7 +60,7 @@ func (s *Enemy) getPosition() (float64, float64){
 }
 
 func (s *Enemy) addCollider(events []event) *Enemy {
-	g.colliders = append(g.colliders, NewCollider(s, events))
+	g.colliders = append(g.colliders, NewCompCollider(s, events))
 	return s
 }
 
