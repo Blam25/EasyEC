@@ -16,6 +16,8 @@ type Game struct {
 	compRendNPO []*CompRendNPO
 	compRendNPOMap map[int]*CompRendNPO
 	compCollider []*CompCollider
+	compMoveRand []*CompMoveRand
+	compMovePatrol []*CompMovePatrol
 	entityId int
 }
 
@@ -34,6 +36,9 @@ func (g *Game) Update() error {
 	/*for _, s := range g.collideables {
 		s.collide(rectPlayer)
 	}*/
+	for _, s := range g.compMoveRand {
+		s.MoveRand()
+	}
 	for _, s := range g.compCollider {
 		s.collide(rectPlayer)
 	}

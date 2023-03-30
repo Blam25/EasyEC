@@ -31,15 +31,16 @@ func NewCompRenderedNonPlayer(entity *Entity, xpos float64, ypos float64) {
 	g.compRendNPO = append(g.compRendNPO, &new)
 }
 
+//takes x, y (Float64) as position
 func NewCompRendNPO(entity *Entity, data *dataArgs) {
 	new := CompRendNPO{}
+	new.xpos = data.floats[0]
+	new.ypos = data.floats[1]
 	var err error
 	new.img, _, err = ebitenutil.NewImageFromFile("assets/gopher.png")
 	if err != nil {
 		log.Fatal(err)
 	}
-	new.xpos = data.floats[0]
-	new.ypos = data.floats[1]
 	new.entity = entity
 	g.compRendNPO = append(g.compRendNPO, &new)
 	g.compRendNPOMap[entity.id] = &new

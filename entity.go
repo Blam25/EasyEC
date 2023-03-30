@@ -2,6 +2,7 @@ package main
 
 type Entity struct {
 	id int
+	comprend CompRendNPO
 }
 
 func NewEntity() *Entity{
