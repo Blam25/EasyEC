@@ -9,9 +9,9 @@ package main
 //import	//("github.com/hajimehoshi/ebiten/v2")
 
 type CompMovePatrol struct {
-	entity *Entity
+	entity   *Entity
 	Velocity float64
-	goals []float64
+	goals    []float64
 }
 
 /*
@@ -20,6 +20,7 @@ func NewCompCollider(enemy *Enemy, events []event) CompCollider{
 	new.enemy = enemy
 	new.events = events
 	return new
+
 }*/
 
 func NewCompMovePatrol(entity *Entity, data *dataArgs) {
@@ -30,5 +31,5 @@ func NewCompMovePatrol(entity *Entity, data *dataArgs) {
 }
 
 func (s *CompMovePatrol) MovePatrol() {
-	
+
 }
