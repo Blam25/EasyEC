@@ -20,9 +20,6 @@ func NewCompCollider(enemy *Enemy, events []event) CompCollider{
 	new.enemy = enemy
 	new.events = events
 	return new
-
-
-
 }*/
 
 func NewCompMovePatrol(entity *Entity, data *dataArgs) {
