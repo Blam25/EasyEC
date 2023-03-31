@@ -9,14 +9,14 @@ import (
 )
 
 type CompRendNPO struct {
-	img       *ebiten.Image
-	op        ebiten.DrawImageOptions
-	xpos      float64
-	ypos      float64
-	entity		*Entity
+	img    *ebiten.Image
+	op     ebiten.DrawImageOptions
+	xpos   float64
+	ypos   float64
+	entity *Entity
 }
 
-//type NewRenderedNonPlayer func(*Entity)  
+//type NewRenderedNonPlayer func(*Entity)
 
 func NewCompRenderedNonPlayer(entity *Entity, xpos float64, ypos float64) {
 	new := CompRendNPO{}
@@ -28,11 +28,13 @@ func NewCompRenderedNonPlayer(entity *Entity, xpos float64, ypos float64) {
 	new.xpos = xpos
 	new.ypos = ypos
 	new.entity = entity
-	g.compRendNPO = append(g.compRendNPO, &new)
+	//systemsRenderMap["SystemRender"].getArray() = append(systemsRenderMap["SystemRender"].getArray(), &new)
+	print("append2")
+	//g.compRendNPO = append(g.compRendNPO, &new)
 }
 
-//takes x, y (Float64) as position
-func NewCompRendNPO(entity *Entity, data *dataArgs) {
+// takes x, y (Float64) as position
+func NewCompRendNPO(entity *Entity, data *data) {
 	new := CompRendNPO{}
 	new.xpos = data.floats[0]
 	new.ypos = data.floats[1]
@@ -43,6 +45,7 @@ func NewCompRendNPO(entity *Entity, data *dataArgs) {
 	}
 	new.entity = entity
 	g.compRendNPO = append(g.compRendNPO, &new)
+	//systemsRenderMap["s1"].appendArray(&new)
 	g.compRendNPOMap[entity.id] = &new
 }
 
@@ -51,7 +54,7 @@ func (s *CompRendNPO) moveCamera(deltaX float64, deltaY float64) {
 	s.xpos = s.xpos + deltaX
 }
 
-func (s *CompRendNPO) getPosition() (float64, float64){
+func (s *CompRendNPO) getPosition() (float64, float64) {
 	return s.xpos, s.ypos
 }
 
@@ -59,4 +62,8 @@ func (s *CompRendNPO) draw(screen *ebiten.Image) {
 	s.op.GeoM.Reset()
 	s.op.GeoM.Translate(s.xpos, s.ypos)
 	screen.DrawImage(s.img, &s.op)
+}
+
+func (s *CompRendNPO) getEntity() *Entity {
+	return s.entity
 }

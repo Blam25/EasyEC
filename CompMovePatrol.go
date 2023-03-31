@@ -22,7 +22,7 @@ func NewCompCollider(enemy *Enemy, events []event) CompCollider{
 	return new
 }*/
 
-func NewCompMovePatrol(entity *Entity, data *dataArgs) {
+func NewCompMovePatrol(entity *Entity, data *data) {
 	new := CompMovePatrol{}
 	new.entity = entity
 	new.goals = data.floats

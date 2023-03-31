@@ -21,7 +21,7 @@ func NewCompCollider(enemy *Enemy, events []event) CompCollider{
 	return new
 }*/
 
-func NewCompMoveRand(entity *Entity, data *dataArgs) {
+func NewCompMoveRand(entity *Entity, data *data) {
 	new := CompMoveRand{}
 	new.entity = entity
 	g.compMoveRand = append(g.compMoveRand, &new)

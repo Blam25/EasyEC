@@ -7,18 +7,18 @@ import (
 )
 
 type Game struct {
-	collideables []collide
-	player Sprite
+	collideables   []collide
+	player         Sprite
 	renderDistance float64
-	colliders []CompCollider
-	colliderMap map[*Enemy]CompCollider
-	entities []*Entity
-	compRendNPO []*CompRendNPO
+	colliders      []CompCollider
+	colliderMap    map[*Enemy]CompCollider
+	entities       []*Entity
+	compRendNPO    []*CompRendNPO
 	compRendNPOMap map[int]*CompRendNPO
-	compCollider []*CompCollider
-	compMoveRand []*CompMoveRand
+	compCollider   []*CompCollider
+	compMoveRand   []*CompMoveRand
 	compMovePatrol []*CompMovePatrol
-	entityId int
+	entityId       int
 }
 
 func NewGame() Game {
@@ -50,15 +50,12 @@ var i float64 = 0
 func (g *Game) Draw(screen *ebiten.Image) {
 
 	g.player.draw(screen)
-	for _, s := range g.compRendNPO {
-		x, y := s.getPosition()
-		if (x-g.player.xpos) > -g.renderDistance && (x-g.player.xpos) < g.renderDistance && (y-g.player.ypos) > -g.renderDistance && (y-g.player.ypos) < g.renderDistance {
-			s.draw(screen)
-		}
+	for _, s := range systemsDraw {
+		s.execute(screen)
 	}
+
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
 	return 640, 480
 }
-
