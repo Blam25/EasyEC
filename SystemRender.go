@@ -10,7 +10,7 @@ type SystemRender struct {
 
 func NewSystemRender() {
 	new := SystemRender{}
-	systemsDraw = append(systemsDraw, &new)
+	systems.drawFirst = append(systems.drawFirst, &new)
 	systemsRenderMap["s1"] = &new
 }
 

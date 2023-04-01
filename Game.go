@@ -1,8 +1,6 @@
 package main
 
 import (
-	"image"
-
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
@@ -28,29 +26,27 @@ func NewGame() Game {
 }
 
 func (g *Game) Update() error {
-	deltax, deltay := g.player.move()
-	for _, s := range g.compRendNPO {
-		s.moveCamera(deltax, deltay)
+
+	for _, s := range systems.first {
+		s.execute()
 	}
-	rectPlayer := image.Rect(int(g.player.xpos), int(g.player.ypos), int(g.player.xpos)+30, int(g.player.ypos)+30)
-	/*for _, s := range g.collideables {
-		s.collide(rectPlayer)
-	}*/
-	for _, s := range g.compMoveRand {
-		s.MoveRand()
+	for _, s := range systems.second {
+		s.execute()
 	}
-	for _, s := range g.compCollider {
-		s.collide(rectPlayer)
+	for _, s := range systems.third {
+		s.execute()
 	}
+
 	return nil
 }
-
-var i float64 = 0
 
 func (g *Game) Draw(screen *ebiten.Image) {
 
 	g.player.draw(screen)
-	for _, s := range systemsDraw {
+	for _, s := range systems.drawFirst {
+		s.execute(screen)
+	}
+	for _, s := range systems.drawSecond {
 		s.execute(screen)
 	}
 

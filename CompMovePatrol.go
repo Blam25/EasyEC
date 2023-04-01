@@ -26,7 +26,7 @@ func NewCompMovePatrol(entity *Entity, data *data) {
 	new := CompMovePatrol{}
 	new.entity = entity
 	new.goals = data.floats
-	g.compMovePatrol = append(g.compMovePatrol, &new)
+	components.MovePatrol = append(components.MovePatrol, &new)
 }
 
 func (s *CompMovePatrol) MovePatrol() {

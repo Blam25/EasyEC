@@ -11,10 +11,10 @@ import (
 var g Game
 var entityOrder int = 1
 var test int = 1.0
-var systems []System
-var systemsDraw []SystemDraw
+var systems *Systems
 var systemsMap map[string]System
 var systemsRenderMap map[string]SystemDraw
+var components *Components
 
 //var entities []*Entity
 //var renderedNonPlayers []*renderedNonPlayer
@@ -22,6 +22,8 @@ var systemsRenderMap map[string]SystemDraw
 //var op *ebiten.DrawImageOptions
 
 func init() {
+	components = &Components{}
+	systems = &Systems{}
 	systemsMap = make(map[string]System)
 	systemsRenderMap = make(map[string]SystemDraw)
 	NewSystemRender()
@@ -83,6 +85,10 @@ func init() {
 
 		//op := &ebiten.DrawImageOptions{}
 						//op = &ebiten.DrawImageOptions{}*/
+}
+
+func initComponents() {
+	components = &Components{}
 }
 
 func main() {

@@ -45,6 +45,7 @@ func NewCompRendNPO(entity *Entity, data *data) {
 	}
 	new.entity = entity
 	g.compRendNPO = append(g.compRendNPO, &new)
+	systems.drawFirst = append(systems.drawFirst, &new)
 	//systemsRenderMap["s1"].appendArray(&new)
 	g.compRendNPOMap[entity.id] = &new
 }
