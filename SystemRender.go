@@ -15,7 +15,7 @@ func NewSystemRender() {
 }
 
 func (s *SystemRender) execute(screen *ebiten.Image) {
-	for _, z := range g.compRendNPO {
+	for _, z := range components.RendNPO {
 		x, y := z.getPosition()
 		if (x-g.player.xpos) > -g.renderDistance && (x-g.player.xpos) < g.renderDistance && (y-g.player.ypos) > -g.renderDistance && (y-g.player.ypos) < g.renderDistance {
 			z.draw(screen)

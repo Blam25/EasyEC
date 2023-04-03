@@ -22,6 +22,7 @@ func (s *SysMoveWithCam) move() (float64, float64) {
 	var x float64
 	var y float64
 	if ebiten.IsKeyPressed(ebiten.KeyW) {
+		//print("hej")
 		//s.ypos = s.ypos - s.moveSpeed
 		y = components.player.moveSpeed
 	}

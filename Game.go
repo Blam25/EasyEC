@@ -42,7 +42,7 @@ func (g *Game) Update() error {
 
 func (g *Game) Draw(screen *ebiten.Image) {
 
-	g.player.draw(screen)
+	components.player.draw(screen)
 	for _, s := range systems.drawFirst {
 		s.execute(screen)
 	}

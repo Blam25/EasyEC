@@ -26,7 +26,7 @@ func init() {
 	systems = &Systems{}
 	systemsMap = make(map[string]System)
 	systemsRenderMap = make(map[string]SystemDraw)
-	NewSystemRender()
+	initSystems()
 
 	//toDataArg([]string{"hej"})
 
@@ -74,7 +74,7 @@ func init() {
 		NewCompCollider, &data{})
 
 	//NewCompRenderedNonPlayer(entity2, 1000, 1000)
-	g.player = sprite1
+	components.player = sprite1
 	/*
 				//enemy1 := New_Enemy()
 				enemy2 := New_Enemy() ; enemy2.xpos = 500 ; enemy2.ypos = 500
@@ -89,6 +89,11 @@ func init() {
 
 func initComponents() {
 	components = &Components{}
+}
+
+func initSystems() {
+	NewSystemRender()
+	NewSysMoveWithCam()
 }
 
 func main() {
@@ -114,7 +119,7 @@ type System interface {
 type SystemDraw interface {
 	execute(*ebiten.Image)
 	//getArray() genericArray[any]
-	appendArray(any)
+	//appendArray(any)
 }
 
 type collide interface {
