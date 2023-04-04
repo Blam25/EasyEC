@@ -1,4 +1,4 @@
-module ebiten3
+module github.com/Blam25/ebiten3
 
 go 1.19
 
