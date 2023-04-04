@@ -49,22 +49,22 @@ func NewCompRendNPO(entity *Entity, data *data) {
 	//systemsRenderMap["s1"].appendArray(&new)
 	g.compRendNPOMap[entity.id] = &new
 }
-
-func (s *CompRendNPO) moveCamera(deltaX float64, deltaY float64) {
-	s.ypos = s.ypos + deltaY
-	s.xpos = s.xpos + deltaX
-}
-
 func (s *CompRendNPO) getPosition() (float64, float64) {
 	return s.xpos, s.ypos
 }
 
-func (s *CompRendNPO) draw(screen *ebiten.Image) {
-	s.op.GeoM.Reset()
-	s.op.GeoM.Translate(s.xpos, s.ypos)
-	screen.DrawImage(s.img, &s.op)
-}
+/*
+	func (s *CompRendNPO) moveCamera(deltaX float64, deltaY float64) {
+		s.ypos = s.ypos + deltaY
+		s.xpos = s.xpos + deltaX
+	}
 
+	func (s *CompRendNPO) draw(screen *ebiten.Image) {
+		s.op.GeoM.Reset()
+		s.op.GeoM.Translate(s.xpos, s.ypos)
+		screen.DrawImage(s.img, &s.op)
+	}
+*/
 func (s *CompRendNPO) getEntity() *Entity {
 	return s.entity
 }
