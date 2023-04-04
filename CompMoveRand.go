@@ -1,4 +1,4 @@
-package main
+package EasyEC
 
 /*
 	_ "image/png"

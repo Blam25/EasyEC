@@ -1,4 +1,4 @@
-package main
+package EasyEC
 
 type DmgEvent struct {
 	Damage int

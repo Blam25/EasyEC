@@ -1,4 +1,4 @@
-package main
+package EasyEC
 
 import (
 	_ "image/png"
