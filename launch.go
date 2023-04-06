@@ -8,13 +8,13 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
-var g Game
+var G Game
 var entityOrder int = 1
 var test int = 1.0
-var systems *Systems
-var systemsMap map[string]System
-var systemsRenderMap map[string]SystemDraw
-var components *Components
+var Systems *ECSystems
+var SystemsMap map[string]System
+var SystemsRenderMap map[string]SystemDraw
+var Components *ECComponents
 
 //var entities []*Entity
 //var renderedNonPlayers []*renderedNonPlayer
@@ -22,42 +22,44 @@ var components *Components
 //var op *ebiten.DrawImageOptions
 
 func init() {
-	components = &Components{}
-	systems = &Systems{}
-	systemsMap = make(map[string]System)
-	systemsRenderMap = make(map[string]SystemDraw)
+	Components = &ECComponents{}
+	Systems = &ECSystems{}
+	SystemsMap = make(map[string]System)
+	SystemsRenderMap = make(map[string]SystemDraw)
+
 	initSystems()
+	initComponents()
 
 	//toDataArg([]string{"hej"})
 
-	g = NewGame()
-	g.compRendNPOMap = make(map[int]*CompRendNPO)
-	sprite1 := New_Sprite()
+	G = NewGame()
+	G.compRendNPOMap = make(map[int]*CompRendNPO)
+	//sprite1 := New_Sprite()
 
-	entity1 := NewEntity()
+	/*entity1 := NewEntity()
 	print(&entity1)
 	entity1.
-		with(NewCompRendNPO, NewDataArg(nil, nil, FArr(500, 500), nil)).
-		with(NewCompCollider, &data{strings: SArr("hej", "yo"), ints: IArr(9, 2)})
+		With(NewCompRendNPO, NewDataArg(nil, nil, FArr(500, 500), nil)).
+		With(NewCompCollider, &Data{Strings: SArr("hej", "yo"), Ints: IArr(9, 2)})
 
-	entity2 := NewEntity().with(
-		NewCompRendNPO, NewDataArgFloat(100, 100)).with(
-		NewCompCollider, NewDataArgEmpty()).with(
-		NewCompMoveRand, &data{})
+	entity2 := NewEntity().With(
+		NewCompRendNPO, NewDataArgFloat(100, 100)).With(
+		NewCompCollider, NewDataArgEmpty()).With(
+		NewCompMoveRand, &Data{})
 
-	entity4 := NewEntity().with(
-		NewCompRendNPO, NewDataArgFloat(400, 400)).with(
-		NewCompMoveRand, NewDataArgEmpty()).with(
+	entity4 := NewEntity().With(
+		NewCompRendNPO, NewDataArgFloat(400, 400)).With(
+		NewCompMoveRand, NewDataArgEmpty()).With(
 		NewCompCollider, NewDataArgEmpty())
 	print(&entity4)
 
-	NewEntity().with(
-		NewCompRendNPO, NewDataArgFloat(400, 400)).with(
+	NewEntity().With(
+		NewCompRendNPO, NewDataArgFloat(400, 400)).With(
 		NewCompCollider, NewDataArgEmpty())
 	//print(&entity5)
 
 	entity6 := NewEntity().
-		with(NewCompRendNPO, NewDataArgFloat(400, 400)).with(
+		With(NewCompRendNPO, NewDataArgFloat(400, 400)).With(
 		NewCompCollider, NewDataArgEmpty())
 
 	print(entity6)
@@ -69,12 +71,12 @@ func init() {
 	//with(NewCompCollider, &dataArgs{})
 
 	entity3 := NewEntity()
-	entity3.with(
-		NewCompRendNPO, NewDataArgFloat(1000, 0)).with(
-		NewCompCollider, &data{})
+	entity3.With(
+		NewCompRendNPO, NewDataArgFloat(1000, 0)).With(
+		NewCompCollider, &Data{})
 
 	//NewCompRenderedNonPlayer(entity2, 1000, 1000)
-	components.player = sprite1
+	Components.Player = sprite1
 	/*
 				//enemy1 := New_Enemy()
 				enemy2 := New_Enemy() ; enemy2.xpos = 500 ; enemy2.ypos = 500
@@ -85,15 +87,21 @@ func init() {
 
 		//op := &ebiten.DrawImageOptions{}
 						//op = &ebiten.DrawImageOptions{}*/
+
 }
 
 func initComponents() {
-	components = &Components{}
+	Components = &ECComponents{}
+	Components.CollisionMap = make(map[int]*CompCollision)
+	Components.EventCollisionMap = make(map[int][]InteractionEvent)
 }
 
 func initSystems() {
 	NewSystemRender()
 	NewSysMoveWithCam()
+	NewSysCollide()
+	NewSysCollision()
+	NewSysClear()
 }
 
 func main() {
@@ -102,18 +110,18 @@ func main() {
 	//ebiten.SetTPS(ebiten.SyncWithFPS)
 	//ebiten.SetFPSMode(ebiten.)
 	ebiten.SetWindowTitle("Render an image")
-	if err := ebiten.RunGame(&g); err != nil {
+	if err := ebiten.RunGame(&G); err != nil {
 		log.Fatal(err)
 	}
 }
 
 type Component interface {
 	getEntity() *Entity
-	getData() *data
+	getData() *Data
 }
 
 type System interface {
-	execute()
+	Execute()
 }
 
 type SystemDraw interface {
@@ -130,68 +138,68 @@ type event interface {
 	execute(enemy *Enemy)
 }
 
-type data struct {
-	strings      []string
-	ints         []int
-	floats       []float64
-	bools        []bool
-	stringArrays [][]string
-	intArrays    [][]int
-	floatArrays  [][]float64
-	boolArrays   [][]bool
+type Data struct {
+	Strings      []string
+	Ints         []int
+	Floats       []float64
+	Bools        []bool
+	StringArrays [][]string
+	IntArrays    [][]int
+	FloatArrays  [][]float64
+	BoolArrays   [][]bool
 }
 
-func (s *data) setString(theStrings ...string) {
-	s.strings = theStrings
+func (s *Data) setString(theStrings ...string) {
+	s.Strings = theStrings
 }
 
-func (s *data) setInt(theInts ...int) {
-	s.ints = theInts
+func (s *Data) setInt(theInts ...int) {
+	s.Ints = theInts
 }
 
-func (s *data) setFloat(theFloats ...float64) {
-	s.floats = theFloats
+func (s *Data) setFloat(theFloats ...float64) {
+	s.Floats = theFloats
 }
 
-func (s *data) setBool(theBools ...bool) {
-	s.bools = theBools
+func (s *Data) setBool(theBools ...bool) {
+	s.Bools = theBools
 }
 
-func NewDataArg(strings []string, ints []int, floats []float64, bools []bool) *data {
-	new := data{}
-	new.strings = strings
-	new.ints = ints
-	new.floats = floats
-	new.bools = bools
+func NewDataArg(strings []string, ints []int, floats []float64, bools []bool) *Data {
+	new := Data{}
+	new.Strings = strings
+	new.Ints = ints
+	new.Floats = floats
+	new.Bools = bools
 	return &new
 }
 
-func NewDataArgEmpty() *data {
-	new := data{}
+func NewDataArgEmpty() *Data {
+	new := Data{}
 	return &new
 }
 
-func NewDataArgString(theStrings ...string) *data {
-	new := data{}
-	new.strings = theStrings
+func NewDataArgString(theStrings ...string) *Data {
+	new := Data{}
+	new.Strings = theStrings
 	return &new
 }
 
-func NewDataArgInt(theInts ...int) *data {
-	new := data{}
-	new.ints = theInts
+func NewDataArgInt(theInts ...int) *Data {
+	new := Data{}
+	new.Ints = theInts
 	return &new
 }
 
-func NewDataArgFloat(theFloats ...float64) *data {
-	new := data{}
-	new.floats = theFloats
+func NewDataArgFloat(theFloats ...float64) *Data {
+	new := Data{}
+	new.Floats = theFloats
 	return &new
 }
 
-func NewDataArgBool(theBools ...bool) *data {
-	new := data{}
-	new.bools = theBools
+func NewDataArgBool(theBools ...bool) *Data {
+	new := Data{}
+	new.Bools = theBools
 	return &new
 }
 

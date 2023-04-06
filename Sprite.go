@@ -8,52 +8,54 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 )
 
-type Sprite struct {
-	img       *ebiten.Image
-	op        ebiten.DrawImageOptions
-	xpos      float64
-	ypos      float64
-	moveSpeed float64
+type CompPlayer struct {
+	entity    *Entity
+	Img       *ebiten.Image
+	Op        ebiten.DrawImageOptions
+	Xpos      float64
+	Ypos      float64
+	MoveSpeed float64
 }
 
-func New_Sprite() Sprite {
-	s := Sprite{}
+func NewCompPlayer(entity *Entity) CompPlayer {
+	s := CompPlayer{}
+	s.entity = entity
 	var err error
-	s.img, _, err = ebitenutil.NewImageFromFile("assets/gopher.png")
+	s.Img, _, err = ebitenutil.NewImageFromFile("assets/gopher.png")
 	if err != nil {
 		log.Fatal(err)
 	}
-	s.xpos = 150
-	s.ypos = 150
-	s.moveSpeed = 7
+	s.Xpos = 150
+	s.Ypos = 150
+	s.MoveSpeed = 7
+	Components.Player = &s
 	return s
 }
 
-func (s *Sprite) draw(screen *ebiten.Image) {
-	s.op.GeoM.Reset()
-	s.op.GeoM.Translate(s.xpos, s.ypos)
-	screen.DrawImage(s.img, &s.op)
+func (s *CompPlayer) draw(screen *ebiten.Image) {
+	s.Op.GeoM.Reset()
+	s.Op.GeoM.Translate(s.Xpos, s.Ypos)
+	screen.DrawImage(s.Img, &s.Op)
 }
 
-
-func (s *Sprite) move() (float64, float64) {
+func (s *CompPlayer) move() (float64, float64) {
 	var x float64
 	var y float64
 	if ebiten.IsKeyPressed(ebiten.KeyW) {
 		//s.ypos = s.ypos - s.moveSpeed
-		y = s.moveSpeed
+		y = s.MoveSpeed
 	}
 	if ebiten.IsKeyPressed(ebiten.KeyS) {
 		//s.ypos = s.ypos + s.moveSpeed
-		y = -s.moveSpeed
+		y = -s.MoveSpeed
 	}
 	if ebiten.IsKeyPressed(ebiten.KeyD) {
 		//s.xpos = s.xpos + s.moveSpeed
-		x = -s.moveSpeed
+		x = -s.MoveSpeed
 	}
 	if ebiten.IsKeyPressed(ebiten.KeyA) {
 		//s.xpos = s.xpos - s.moveSpeed
-		x = s.moveSpeed
+		x = s.MoveSpeed
 	}
 	return x, y
 }

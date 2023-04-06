@@ -9,9 +9,9 @@ package EasyEC
 import "image"
 
 type CompCollider struct {
-	entity   *Entity
-	events   []event
-	Velocity float64
+	entity     *Entity
+	Collisions []*Entity
+	Collided   bool
 }
 
 /*
@@ -22,15 +22,15 @@ func NewCompCollider(enemy *Enemy, events []event) CompCollider{
 	return new
 }*/
 
-func NewCompCollider(entity *Entity, data *data) {
+func NewCompCollider(entity *Entity, data *Data) {
 	new := CompCollider{}
 	new.entity = entity
-	components.Collider = append(components.Collider, &new)
+	Components.Collider = append(Components.Collider, &new)
 }
 
 func (s *CompCollider) collide(rectPlayer image.Rectangle) {
 
-	rectEnemy := image.Rect(int(g.compRendNPOMap[s.entity.id].xpos), int(g.compRendNPOMap[s.entity.id].ypos), int(g.compRendNPOMap[s.entity.id].xpos)+30, int(g.compRendNPOMap[s.entity.id].ypos)+30)
+	rectEnemy := image.Rect(int(G.compRendNPOMap[s.entity.id].Xpos), int(G.compRendNPOMap[s.entity.id].Ypos), int(G.compRendNPOMap[s.entity.id].Xpos)+30, int(G.compRendNPOMap[s.entity.id].Ypos)+30)
 	//rectPlayer := image.Rect(int(player.xpos), int(player.ypos), int(player.xpos) + 30, int(player.ypos) + 30)
 	if rectEnemy.Overlaps(rectPlayer) {
 

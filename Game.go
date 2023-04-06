@@ -6,7 +6,7 @@ import (
 
 type Game struct {
 	collideables   []collide
-	player         Sprite
+	player         CompPlayer
 	renderDistance float64
 	colliders      []CompCollider
 	colliderMap    map[*Enemy]CompCollider
@@ -27,14 +27,17 @@ func NewGame() Game {
 
 func (g *Game) Update() error {
 
-	for _, s := range systems.first {
-		s.execute()
+	for _, s := range Systems.First {
+		s.Execute()
 	}
-	for _, s := range systems.second {
-		s.execute()
+	for _, s := range Systems.Second {
+		s.Execute()
 	}
-	for _, s := range systems.third {
-		s.execute()
+	for _, s := range Systems.Third {
+		s.Execute()
+	}
+	for _, s := range Systems.Fourth {
+		s.Execute()
 	}
 
 	return nil
@@ -42,11 +45,11 @@ func (g *Game) Update() error {
 
 func (g *Game) Draw(screen *ebiten.Image) {
 
-	components.player.draw(screen)
-	for _, s := range systems.drawFirst {
+	Components.Player.draw(screen)
+	for _, s := range Systems.DrawFirst {
 		s.execute(screen)
 	}
-	for _, s := range systems.drawSecond {
+	for _, s := range Systems.DrawSecond {
 		s.execute(screen)
 	}
 

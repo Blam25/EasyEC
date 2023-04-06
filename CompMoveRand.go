@@ -6,13 +6,15 @@ package EasyEC
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"*/
-import	(
-	"math/rand")
+import (
+	"math/rand"
+)
 
 type CompMoveRand struct {
-	entity *Entity
+	entity   *Entity
 	Velocity float64
 }
+
 /*
 func NewCompCollider(enemy *Enemy, events []event) CompCollider{
 	new := CompCollider{}
@@ -21,13 +23,13 @@ func NewCompCollider(enemy *Enemy, events []event) CompCollider{
 	return new
 }*/
 
-func NewCompMoveRand(entity *Entity, data *data) {
+func NewCompMoveRand(entity *Entity, data *Data) {
 	new := CompMoveRand{}
 	new.entity = entity
-	g.compMoveRand = append(g.compMoveRand, &new)
+	G.compMoveRand = append(G.compMoveRand, &new)
 }
 
 func (s *CompMoveRand) MoveRand() {
-	g.compRendNPOMap[s.entity.id].xpos = g.compRendNPOMap[s.entity.id].xpos + (float64(rand.Intn(10))-5)
-	g.compRendNPOMap[s.entity.id].ypos = g.compRendNPOMap[s.entity.id].ypos + (float64(rand.Intn(10))-5)
+	G.compRendNPOMap[s.entity.id].Xpos = G.compRendNPOMap[s.entity.id].Xpos + (float64(rand.Intn(10)) - 5)
+	G.compRendNPOMap[s.entity.id].Ypos = G.compRendNPOMap[s.entity.id].Ypos + (float64(rand.Intn(10)) - 5)
 }

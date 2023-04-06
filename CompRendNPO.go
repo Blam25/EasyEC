@@ -9,11 +9,11 @@ import (
 )
 
 type CompRendNPO struct {
-	img    *ebiten.Image
-	op     ebiten.DrawImageOptions
-	xpos   float64
-	ypos   float64
-	entity *Entity
+	Img    *ebiten.Image
+	Op     ebiten.DrawImageOptions
+	Xpos   float64
+	Ypos   float64
+	Entity *Entity
 }
 
 //type NewRenderedNonPlayer func(*Entity)
@@ -21,36 +21,36 @@ type CompRendNPO struct {
 func NewCompRenderedNonPlayer(entity *Entity, xpos float64, ypos float64) {
 	new := CompRendNPO{}
 	var err error
-	new.img, _, err = ebitenutil.NewImageFromFile("assets/gopher.png")
+	new.Img, _, err = ebitenutil.NewImageFromFile("assets/gopher.png")
 	if err != nil {
 		log.Fatal(err)
 	}
-	new.xpos = xpos
-	new.ypos = ypos
-	new.entity = entity
+	new.Xpos = xpos
+	new.Ypos = ypos
+	new.Entity = entity
 	//systemsRenderMap["SystemRender"].getArray() = append(systemsRenderMap["SystemRender"].getArray(), &new)
 	print("append2")
 	//g.compRendNPO = append(g.compRendNPO, &new)
 }
 
 // takes x, y (Float64) as position
-func NewCompRendNPO(entity *Entity, data *data) {
+func NewCompRendNPO(entity *Entity, data *Data) {
 	new := CompRendNPO{}
-	new.xpos = data.floats[0]
-	new.ypos = data.floats[1]
+	new.Xpos = data.Floats[0]
+	new.Ypos = data.Floats[1]
 	var err error
-	new.img, _, err = ebitenutil.NewImageFromFile("assets/gopher.png")
+	new.Img, _, err = ebitenutil.NewImageFromFile("assets/gopher.png")
 	if err != nil {
 		log.Fatal(err)
 	}
-	new.entity = entity
-	g.compRendNPO = append(g.compRendNPO, &new)
-	components.RendNPO = append(components.RendNPO, &new)
+	new.Entity = entity
+	G.compRendNPO = append(G.compRendNPO, &new)
+	Components.RendNPO = append(Components.RendNPO, &new)
 	//systemsRenderMap["s1"].appendArray(&new)
-	g.compRendNPOMap[entity.id] = &new
+	G.compRendNPOMap[entity.id] = &new
 }
 func (s *CompRendNPO) getPosition() (float64, float64) {
-	return s.xpos, s.ypos
+	return s.Xpos, s.Ypos
 }
 
 /*
@@ -66,5 +66,5 @@ func (s *CompRendNPO) getPosition() (float64, float64) {
 	}
 */
 func (s *CompRendNPO) getEntity() *Entity {
-	return s.entity
+	return s.Entity
 }
