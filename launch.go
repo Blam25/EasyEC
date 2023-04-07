@@ -94,6 +94,7 @@ func initComponents() {
 	Components = &ECComponents{}
 	Components.CollisionMap = make(map[int]*CompCollision)
 	Components.EventCollisionMap = make(map[int][]InteractionEvent)
+	Components.HealthMap = make(map[int]*CompHealth)
 }
 
 func initSystems() {
@@ -102,6 +103,7 @@ func initSystems() {
 	NewSysCollide()
 	NewSysCollision()
 	NewSysClear()
+
 }
 
 func main() {

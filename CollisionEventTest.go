@@ -14,5 +14,6 @@ func NewCollisionEventTest(entity *Entity, damage int) {
 }
 
 func (s *CollisionEventTest) ExecuteInteraction(player *Entity) {
-	print("yo")
+	Components.HealthMap[player.GetId()].Health = Components.HealthMap[player.GetId()].Health - s.damage
+	print(Components.HealthMap[player.GetId()].Health)
 }

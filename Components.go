@@ -13,6 +13,8 @@ type ECComponents struct {
 	MovePatrolMap     map[int]*CompMovePatrol
 	Collision         []*CompCollision
 	CollisionMap      map[int]*CompCollision
+	Health            []*CompHealth
+	HealthMap         map[int]*CompHealth
 	EventCollision    []InteractionEvent
 	EventCollisionMap map[int][]InteractionEvent
 }

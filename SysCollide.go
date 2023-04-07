@@ -24,12 +24,16 @@ func (s *SysCollide) Execute() {
 func (s *SysCollide) collide(comp *CompCollider) {
 
 	rectEnemy := image.Rect(int(G.compRendNPOMap[comp.entity.id].Xpos), int(G.compRendNPOMap[comp.entity.id].Ypos), int(G.compRendNPOMap[comp.entity.id].Xpos)+30, int(G.compRendNPOMap[comp.entity.id].Ypos)+30)
-	rectPlayer := image.Rect(int(Components.Player.Xpos), int(Components.Player.Ypos), int(Components.Player.Xpos)+30, int(Components.Player.Ypos)+30)
+	rectPlayer := image.Rect(
+		int(Components.Player.Xpos),
+		int(Components.Player.Ypos),
+		int(Components.Player.Xpos)+30,
+		int(Components.Player.Ypos)+30)
 	if rectEnemy.Overlaps(rectPlayer) {
 		if comp.Collided == false {
 
 			comp.Collided = true
-			go timerThreeSec(comp)
+			go timerTwoSec(comp)
 
 			//comp.Collided = true
 			NewCompCollision(comp.entity, Components.Player.entity)
@@ -42,7 +46,7 @@ func (s *SysCollide) collide(comp *CompCollider) {
 	}
 }
 
-func timerThreeSec(comp *CompCollider) {
+func timerTwoSec(comp *CompCollider) {
 	time.Sleep(2 * time.Second)
 	comp.Collided = false
 }

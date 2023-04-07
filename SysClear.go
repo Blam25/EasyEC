@@ -5,7 +5,7 @@ type SysClear struct {
 
 func NewSysClear() {
 	new := &SysClear{}
-	Systems.Third = append(Systems.Third, new)
+	Systems.Fourth = append(Systems.Fourth, new)
 }
 
 func (s *SysClear) Execute() {
