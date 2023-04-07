@@ -12,9 +12,9 @@ func NewSysMoveWithCam() {
 
 func (s *SysMoveWithCam) Execute() {
 	deltax, deltay := s.move()
-	for _, z := range Components.RendNPO {
-		z.Ypos = z.Ypos + deltay
-		z.Xpos = z.Xpos + deltax
+	for _, z := range Components.MovedWithCamera {
+		Components.PositionMap[z.Entity.GetId()].Ypos = Components.PositionMap[z.Entity.GetId()].Ypos + deltay
+		Components.PositionMap[z.Entity.GetId()].Xpos = Components.PositionMap[z.Entity.GetId()].Xpos + deltax
 	}
 }
 

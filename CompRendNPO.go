@@ -8,7 +8,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 )
 
-type CompRendNPO struct {
+type CompRend struct {
 	Img    *ebiten.Image
 	Op     ebiten.DrawImageOptions
 	Xpos   float64
@@ -19,7 +19,7 @@ type CompRendNPO struct {
 //type NewRenderedNonPlayer func(*Entity)
 
 func NewCompRenderedNonPlayer(entity *Entity, xpos float64, ypos float64) {
-	new := CompRendNPO{}
+	new := CompRend{}
 	var err error
 	new.Img, _, err = ebitenutil.NewImageFromFile("assets/gopher.png")
 	if err != nil {
@@ -34,22 +34,18 @@ func NewCompRenderedNonPlayer(entity *Entity, xpos float64, ypos float64) {
 }
 
 // takes x, y (Float64) as position
-func NewCompRendNPO(entity *Entity, data *Data) {
-	new := CompRendNPO{}
-	new.Xpos = data.Floats[0]
-	new.Ypos = data.Floats[1]
+func NewCompRend(entity *Entity, image string) {
+	new := CompRend{}
 	var err error
-	new.Img, _, err = ebitenutil.NewImageFromFile("assets/gopher.png")
+	new.Img, _, err = ebitenutil.NewImageFromFile(image)
 	if err != nil {
 		log.Fatal(err)
 	}
 	new.Entity = entity
-	G.compRendNPO = append(G.compRendNPO, &new)
 	Components.RendNPO = append(Components.RendNPO, &new)
-	//systemsRenderMap["s1"].appendArray(&new)
-	G.compRendNPOMap[entity.id] = &new
 }
-func (s *CompRendNPO) getPosition() (float64, float64) {
+
+func (s *CompRend) getPosition() (float64, float64) {
 	return s.Xpos, s.Ypos
 }
 
@@ -65,6 +61,6 @@ func (s *CompRendNPO) getPosition() (float64, float64) {
 		screen.DrawImage(s.img, &s.op)
 	}
 */
-func (s *CompRendNPO) getEntity() *Entity {
+func (s *CompRend) getEntity() *Entity {
 	return s.Entity
 }

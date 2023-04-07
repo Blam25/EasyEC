@@ -10,3 +10,19 @@
 	
 	//op := &ebiten.DrawImageOptions{}
 	//op = &ebiten.DrawImageOptions{}*/
+	
+	func NewCompRend(entity *Entity, data *Data) {
+	new := CompRend{}
+	new.Xpos = data.Floats[0]
+	new.Ypos = data.Floats[1]
+	var err error
+	new.Img, _, err = ebitenutil.NewImageFromFile("assets/gopher.png")
+	if err != nil {
+		log.Fatal(err)
+	}
+	new.Entity = entity
+	G.compRendNPO = append(G.compRendNPO, &new)
+	Components.RendNPO = append(Components.RendNPO, &new)
+	//systemsRenderMap["s1"].appendArray(&new)
+	G.compRendNPOMap[entity.id] = &new
+}

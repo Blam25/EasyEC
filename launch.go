@@ -33,7 +33,7 @@ func init() {
 	//toDataArg([]string{"hej"})
 
 	G = NewGame()
-	G.compRendNPOMap = make(map[int]*CompRendNPO)
+	G.compRendNPOMap = make(map[int]*CompRend)
 	//sprite1 := New_Sprite()
 
 	/*entity1 := NewEntity()
@@ -95,6 +95,8 @@ func initComponents() {
 	Components.CollisionMap = make(map[int]*CompCollision)
 	Components.EventCollisionMap = make(map[int][]InteractionEvent)
 	Components.HealthMap = make(map[int]*CompHealth)
+	Components.PositionMap = make(map[int]*CompPosition)
+	Components.MovedWithCameraMap = make(map[int]*CompMovedWithCamera)
 }
 
 func initSystems() {

@@ -11,8 +11,8 @@ type Game struct {
 	colliders      []CompCollider
 	colliderMap    map[*Enemy]CompCollider
 	entities       []*Entity
-	compRendNPO    []*CompRendNPO
-	compRendNPOMap map[int]*CompRendNPO
+	compRendNPO    []*CompRend
+	compRendNPOMap map[int]*CompRend
 	compCollider   []*CompCollider
 	compMoveRand   []*CompMoveRand
 	compMovePatrol []*CompMovePatrol
@@ -45,7 +45,6 @@ func (g *Game) Update() error {
 
 func (g *Game) Draw(screen *ebiten.Image) {
 
-	Components.Player.draw(screen)
 	for _, s := range Systems.DrawFirst {
 		s.execute(screen)
 	}

@@ -11,7 +11,7 @@ func NewSysCollision() {
 func (s *SysCollision) Execute() {
 	for _, z := range Components.Collision {
 		for _, j := range Components.EventCollisionMap[z.Entity.GetId()] {
-			j.ExecuteInteraction(z.Player)
+			j.Trigger(z.Player)
 		}
 		//Components.EventCollisionMap[z.Entity.GetId()].ExecuteInteraction(z.Entity, z.Player)
 	}

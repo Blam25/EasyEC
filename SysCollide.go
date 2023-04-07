@@ -23,12 +23,18 @@ func (s *SysCollide) Execute() {
 }
 func (s *SysCollide) collide(comp *CompCollider) {
 
-	rectEnemy := image.Rect(int(G.compRendNPOMap[comp.entity.id].Xpos), int(G.compRendNPOMap[comp.entity.id].Ypos), int(G.compRendNPOMap[comp.entity.id].Xpos)+30, int(G.compRendNPOMap[comp.entity.id].Ypos)+30)
+	rectEnemy := image.Rect(
+		int(Components.PositionMap[comp.entity.id].Xpos),
+		int(Components.PositionMap[comp.entity.id].Ypos),
+		int(Components.PositionMap[comp.entity.id].Xpos)+30,
+		int(Components.PositionMap[comp.entity.id].Ypos)+30,
+	)
 	rectPlayer := image.Rect(
-		int(Components.Player.Xpos),
-		int(Components.Player.Ypos),
-		int(Components.Player.Xpos)+30,
-		int(Components.Player.Ypos)+30)
+		int(Components.PositionMap[Components.Player.entity.GetId()].Xpos),
+		int(Components.PositionMap[Components.Player.entity.GetId()].Ypos),
+		int(Components.PositionMap[Components.Player.entity.GetId()].Xpos)+30,
+		int(Components.PositionMap[Components.Player.entity.GetId()].Ypos)+30,
+	)
 	if rectEnemy.Overlaps(rectPlayer) {
 		if comp.Collided == false {
 
