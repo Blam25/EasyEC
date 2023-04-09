@@ -1,3 +1,3 @@
-An Easy Entity component framework for ebitenengine
+An Easy Entity Component framework for ebitenengine
 
 Under construction...
