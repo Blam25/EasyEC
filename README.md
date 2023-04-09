@@ -1,3 +1,3 @@
-An Easy Entity Component system (ECS) for ebitenengine
+An Easy ECS framework built on top of ebitenengine
 
 Under construction...
