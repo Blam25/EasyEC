@@ -1,10 +1,10 @@
-package Systems
+package ecsys
 
 import (
 	"image"
 	"time"
 
-	C "github.com/Blam25/Test/Pkg/Components"
+	C "github.com/Blam25/Test/Pkg/eccomp"
 )
 
 type Collide struct {

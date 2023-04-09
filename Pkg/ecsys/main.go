@@ -1,4 +1,4 @@
-package Systems
+package ecsys
 
 import (
 	//C "github.com/Blam25/Test/Pkg/Components"

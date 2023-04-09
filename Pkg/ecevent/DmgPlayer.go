@@ -1,8 +1,8 @@
-package Events
+package ecevent
 
 import (
-	C "github.com/Blam25/Test/Pkg/Components"
-	E "github.com/Blam25/Test/Pkg/Entities"
+	C "github.com/Blam25/Test/Pkg/eccomp"
+	E "github.com/Blam25/Test/Pkg/ecentity"
 )
 
 type DmgPlayer struct {

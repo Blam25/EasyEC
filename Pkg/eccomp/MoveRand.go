@@ -1,7 +1,7 @@
-package Components
+package eccomp
 
 import (
-	E "github.com/Blam25/Test/Pkg/Entities"
+	E "github.com/Blam25/Test/Pkg/ecentity"
 )
 
 type MoveRand struct {

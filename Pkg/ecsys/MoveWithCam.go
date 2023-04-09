@@ -1,9 +1,9 @@
-package Systems
+package ecsys
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"
 
-	C "github.com/Blam25/Test/Pkg/Components"
+	C "github.com/Blam25/Test/Pkg/eccomp"
 )
 
 type MoveWithCam struct {

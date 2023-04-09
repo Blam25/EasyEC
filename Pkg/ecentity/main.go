@@ -1,4 +1,4 @@
-package Entities
+package ecentity
 
 var entityId int
 var entities []*Entity

@@ -1,8 +1,8 @@
-package Systems
+package ecsys
 
 import (
-	C "github.com/Blam25/Test/Pkg/Components"
-	EV "github.com/Blam25/Test/Pkg/Events"
+	C "github.com/Blam25/Test/Pkg/eccomp"
+	EV "github.com/Blam25/Test/Pkg/ecevent"
 )
 
 type Collision struct {
