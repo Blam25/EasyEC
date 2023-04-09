@@ -1,0 +1,28 @@
+	//NewCompRenderedNonPlayer(entity1, 200, 200)
+
+	/*
+	//enemy1 := New_Enemy()
+	enemy2 := New_Enemy() ; enemy2.xpos = 500 ; enemy2.ypos = 500 
+	enemy2.addCollider([]event{NewDmgEvent(60, "Im hit"), NewDmgEvent(60, "Yes really")})
+	//NewCollider(&enemy2, []event{NewDmgEvent(60, "Im hit"), NewDmgEvent(60, "Yes really")})
+	enemy3 := New_Enemy() ; enemy3.xpos = 1000 ; enemy3.ypos = 1000 ;
+	//game.collideables = append(game.collideables, &enemy1, &enemy2, &enemy3)
+	
+	//op := &ebiten.DrawImageOptions{}
+	//op = &ebiten.DrawImageOptions{}*/
+	
+	func NewCompRend(entity *Entity, data *Data) {
+	new := CompRend{}
+	new.Xpos = data.Floats[0]
+	new.Ypos = data.Floats[1]
+	var err error
+	new.Img, _, err = ebitenutil.NewImageFromFile("assets/gopher.png")
+	if err != nil {
+		log.Fatal(err)
+	}
+	new.Entity = entity
+	G.compRendNPO = append(G.compRendNPO, &new)
+	Components.RendNPO = append(Components.RendNPO, &new)
+	//systemsRenderMap["s1"].appendArray(&new)
+	G.compRendNPOMap[entity.id] = &new
+}
