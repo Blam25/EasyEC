@@ -1,10 +1,9 @@
-package Systems
+package ecsys
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"
 
-	C "github.com/Blam25/Test/Pkg/Components"
-	//E "github.com/Blam25/Test/Pkg/Entities"
+	C "github.com/Blam25/Test/Pkg/eccomp"
 )
 
 var renderDistance float64 = 1000

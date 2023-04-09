@@ -1,7 +1,7 @@
-package Events
+package ecevent
 
 import (
-	E "github.com/Blam25/Test/Pkg/Entities"
+	E "github.com/Blam25/Test/Pkg/ecentity"
 )
 
 var Events *ECEvents = &ECEvents{}

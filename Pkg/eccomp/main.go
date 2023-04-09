@@ -1,4 +1,4 @@
-package Components
+package eccomp
 
 var Components *ECComponents = &ECComponents{}
 

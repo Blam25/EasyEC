@@ -1,6 +1,6 @@
-package Components
+package eccomp
 
-import E "github.com/Blam25/Test/Pkg/Entities"
+import E "github.com/Blam25/Test/Pkg/ecentity"
 
 type Position struct {
 	entity *E.Entity

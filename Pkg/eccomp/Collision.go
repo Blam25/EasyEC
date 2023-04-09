@@ -1,6 +1,6 @@
-package Components
+package eccomp
 
-import E "github.com/Blam25/Test/Pkg/Entities"
+import E "github.com/Blam25/Test/Pkg/ecentity"
 
 type Collision struct {
 	Entity *E.Entity
