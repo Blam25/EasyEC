@@ -18,6 +18,7 @@ func init() {
 	NewCollide()
 	NewCollision()
 	NewClear()
+	NewMovePatrol()
 }
 
 type ECSystems struct {
